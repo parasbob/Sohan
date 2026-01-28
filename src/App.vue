@@ -37,7 +37,7 @@
         <p>Access and manage your zoning certificates through our secure online portal</p>
 
         <div class="actions">
-          <button class="btn btn-primary">Applicant Login</button>
+          <button class="btn btn-primary" @click="openLogin">Applicant Login</button>
           <button class="btn btn-outline-primary">Applicant Registration</button>
         </div>
       </div>
