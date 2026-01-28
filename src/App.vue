@@ -300,7 +300,7 @@
       </div>
     </footer>
   </div>
-  <DashboardPage v-else :user="user" />
+  <DashboardPage v-else :user="user" @logout="handleLogout" />
   <ApplicantLoginDialog ref="loginDialog" @login-success="handleLogin" />
 </template>
 
@@ -404,6 +404,9 @@ const officials = ref([
 ])
 function toggleFaq(index) {
   activeFaq.value = activeFaq.value === index ? null : index
+}
+const handleLogout = () => {
+  isLoggedIn.value = false
 }
 </script>
 

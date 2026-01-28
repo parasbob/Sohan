@@ -5,7 +5,7 @@
       <!-- Left: User -->
       <div class="user-box">
         <img src="@/assets/login.png" alt="User Avatar" class="avatar-img" />
-        <div class="user-name">Sohan Lakde</div>
+        <div class="user-name"></div>
       </div>
 
       <!-- Center: Portal info -->
@@ -29,9 +29,15 @@
       </div>
 
       <!-- Right: Settings -->
-      <div class="settings-box">
+      <div class="settings-box" @click.stop="toggleMenu">
         <img src="@/assets/setting.png" alt="Settings" class="settings-img" />
         <div class="settings-text">Settings</div>
+        <div v-if="showMenu" class="settings-menu">
+          <div class="menu-item" @click="logout">Logout</div>
+          <div class="menu-item">Change Password</div>
+          <div class="menu-item">Reset Preview</div>
+          <div class="menu-item danger">User Manual</div>
+        </div>
       </div>
     </div>
 
@@ -65,7 +71,7 @@
       <v-spacer></v-spacer>
 
       <div class="get-plan-wrapper">
-        <a href="/Get_Your_Plan.pdf" download class="get-plan-btn"> Get your plan </a>
+        <a href="/SACHIN_ANNA_BARHALI.pdf" download class="get-plan-btn"> Get your plan </a>
       </div>
     </div>
   </div>
@@ -75,8 +81,79 @@
 defineProps({
   user: Object,
 })
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+const emit = defineEmits(['logout'])
+
+const showMenu = ref(false)
+
+const toggleMenu = () => {
+  showMenu.value = !showMenu.value
+  console.log('FD')
+}
+
+const logout = () => {
+  showMenu.value = false
+  emit('logout') // ✅ emit event
+}
+
+// close menu when clicking outside
+const closeOnOutsideClick = () => {
+  showMenu.value = false
+}
+
+onMounted(() => {
+  window.addEventListener('click', closeOnOutsideClick)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('click', closeOnOutsideClick)
+})
 </script>
 <style scoped>
+/* Wrapper */
+.settings-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Icon */
+.settings-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Dropdown menu */
+.settings-menu {
+  position: absolute;
+  top: 54px;
+  right: 0;
+  width: 200px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+/* Menu item */
+.menu-item {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: #f5f7fb;
+}
+
+/* Red text */
+.menu-item.danger {
+  color: #e53935;
+}
 /* Center wrapper */
 .get-plan-wrapper {
   display: flex;
