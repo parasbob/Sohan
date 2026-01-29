@@ -71,7 +71,7 @@
       <v-spacer></v-spacer>
 
       <div class="get-plan-wrapper">
-        <a href="/SACHIN_ANNA_BARHALI.pdf" download class="get-plan-btn"> Get your plan </a>
+        <a href="/Gut_no_49,_Gut_no_50.pdf" download class="get-plan-btn"> Get your plan </a>
       </div>
     </div>
   </div>
